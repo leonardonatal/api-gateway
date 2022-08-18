@@ -31,7 +31,7 @@ export class ClientProxySmartRanking {
     return ClientProxyFactory.create({
       transport: Transport.RMQ,
       options: {
-      urls: [`amqp://${this.configService.get<string>('RABBITMQ_USER')}:${this.configService.get<string>('RABBITMQ_PASSWORD')}@${this.configService.get<string>('RABBITMQ_URL')}`],
+      urls: [`amqp://${this.RABBITMQ_USER}:${this.RABBITMQ_PASSWORD}@${this.RABBITMQ_URL}`],
       queue: 'desafios'
     }
     })
