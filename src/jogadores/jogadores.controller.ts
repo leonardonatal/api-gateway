@@ -12,12 +12,14 @@ import {
   Delete,
   UseInterceptors,
   UploadedFile,
+  UseGuards,
 } from '@nestjs/common';
 import { CriarJogadorDto } from './dtos/criar-jogador.dto';
 import { AtualizarJogadorDto } from './dtos/atualizar-jogador.dto';
 import { ValidacaoParametrosPipe } from '../common/pipes/validacao-parametros.pipe';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { JogadoresService } from './jogadores.service';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('api/v1/jogadores')
 export class JogadoresController {
@@ -39,6 +41,7 @@ export class JogadoresController {
     return await this.jogadoresService.uploadArquivo(file, _id);
   }
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   async consultarJogadores(@Query('idJogador') _id: string) {
     return await this.jogadoresService.consultarJogadores(_id);
